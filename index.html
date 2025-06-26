@@ -28,6 +28,31 @@
 
 <body>
   <h1>teste</h1>
+
+  <button id="twitterShareBtn"
+    style="padding:10px 20px; background:#1DA1F2; color:white; border:none; border-radius:5px; font-family:sans-serif; cursor:pointer;">
+    Compartilhar no Twitter
+  </button>
+
+  <script>
+    function getMetaContent(property) {
+      const meta = document.querySelector(`meta[property='${property}']`);
+      return meta ? meta.getAttribute("content") : "";
+    }
+    
+    document.getElementById("twitterShareBtn").addEventListener("click", function () {
+      const url = getMetaContent("og:url");
+      const title = getMetaContent("og:title");
+
+      const tweetText = encodeURIComponent(title);
+      const tweetUrl = encodeURIComponent(url);
+
+      const twitterIntentUrl = `https://twitter.com/intent/tweet?url=${tweetUrl}&text=${tweetText}`;
+
+      window.open(twitterIntentUrl, "_blank");
+    });
+  </script>
 </body>
+
 
 </html>
